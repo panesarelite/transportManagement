@@ -186,14 +186,16 @@
 <script>
 console.log('🚀 Login page starting - PanesarElite');
 
-// Firebase configuration
+// Firebase configuration - MUST match config.js
 const firebaseConfig = {
-    apiKey: "AIzaSyC38q2zby3TLMuHQEwrShiW-eoeBjjVDYo",
-    authDomain: "test-dispatch010925.firebaseapp.com",
-    projectId: "test-dispatch010925",
-    storageBucket: "test-dispatch010925.firebasestorage.app",
-    messagingSenderId: "501630575030",
-    appId: "1:501630575030:web:6643f228b2f84f8e5da117"
+    apiKey: "AIzaSyAp2XMMtts117nO7vRZxuU-rn10Fx6cPRo",
+    authDomain: "dispatch-management-pec.firebaseapp.com",
+    databaseURL: "https://dispatch-management-pec-default-rtdb.firebaseio.com",
+    projectId: "dispatch-management-pec",
+    storageBucket: "dispatch-management-pec.appspot.com",
+    messagingSenderId: "935397115682",
+    appId: "1:935397115682:web:4fcb5fde4467265a9b077b",
+    measurementId: "G-0KZKQ1YC4M"
 };
 
 let firebaseReady = false;
