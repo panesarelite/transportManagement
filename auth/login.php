@@ -417,7 +417,7 @@ async function handleLogin(event) {
         
         // Redirect to dashboard
         setTimeout(() => {
-            window.location.href = '/site/final/captain/index.php';
+            window.location.href = '/site/final/captain/dispatch/dispatch-list.php';
         }, 500);
         
     } catch (error) {
