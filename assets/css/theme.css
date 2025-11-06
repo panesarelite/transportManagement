@@ -1,0 +1,303 @@
+/* Captain Dispatch Software Theme */
+/* Developed by PanesarElite */
+
+:root {
+    --captain-purple: #6A307E;
+    --captain-purple-dark: #3B256E;
+    --captain-red: #ff6b6b;
+    --sidebar-width: 224px;
+    --sidebar-collapsed-width: 80px;
+}
+
+/* Body and Layout */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    width: var(--sidebar-width);
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+    border-right: 1px solid #e3e6f0;
+    transition: all 0.3s ease;
+    transform: translateX(0);
+    padding-top: 76px; /* Account for fixed navbar */
+}
+
+.sidebar.collapsed {
+    width: var(--sidebar-collapsed-width);
+}
+
+.sidebar-content {
+    padding: 1rem 0;
+}
+
+.sidebar .nav-link {
+    color: #5a5c69;
+    padding: 0.75rem 1rem;
+    border-radius: 0.35rem;
+    margin: 0.25rem 1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #eaecf4;
+    color: var(--captain-purple);
+}
+
+.sidebar .nav-link.active {
+    background: linear-gradient(135deg, var(--captain-purple) 0%, var(--captain-purple-dark) 100%);
+    color: white;
+}
+
+.sidebar .nav-link i {
+    margin-right: 0.75rem;
+    width: 1rem;
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+.sidebar.collapsed .nav-link {
+    justify-content: center;
+    margin: 0.25rem 0.5rem;
+}
+
+.sidebar.collapsed .nav-link span {
+    display: none;
+}
+
+.sidebar.collapsed .nav-link i {
+    margin-right: 0;
+}
+
+/* Main content adjustments */
+main {
+    margin-left: var(--sidebar-width);
+    transition: margin-left 0.3s ease;
+}
+
+.sidebar.collapsed ~ main,
+body.sidebar-collapsed main {
+    margin-left: var(--sidebar-collapsed-width);
+}
+
+/* Topbar */
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+    height: 76px;
+    background: linear-gradient(135deg, #6A307E 0%, #3B256E 100%) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+}
+
+.topbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    pointer-events: none;
+}
+
+/* Navigation brand */
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: white !important;
+}
+
+/* Content area padding for fixed navbar */
+.container-fluid {
+    padding-top: 76px;
+}
+
+/* Cards */
+.card {
+    border-radius: 0.5rem;
+    border: none;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 0.25rem 2rem 0 rgba(58, 59, 69, 0.2);
+}
+
+.card-header {
+    background-color: #f8f9fc;
+    border-bottom: 1px solid #e3e6f0;
+    border-radius: 0.5rem 0.5rem 0 0 !important;
+}
+
+/* Custom border-left colors for KPI cards */
+.border-left-primary {
+    border-left: 0.25rem solid var(--captain-purple) !important;
+}
+
+.border-left-info {
+    border-left: 0.25rem solid #36b9cc !important;
+}
+
+.border-left-warning {
+    border-left: 0.25rem solid #f6c23e !important;
+}
+
+.border-left-success {
+    border-left: 0.25rem solid #1cc88a !important;
+}
+
+.border-left-danger {
+    border-left: 0.25rem solid #e74a3b !important;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--captain-purple) 0%, var(--captain-purple-dark) 100%);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--captain-purple-dark) 0%, #2a1a4e 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(106, 48, 126, 0.3);
+}
+
+/* Forms */
+.form-control:focus {
+    border-color: var(--captain-purple);
+    box-shadow: 0 0 0 0.2rem rgba(106, 48, 126, 0.25);
+}
+
+.form-select:focus {
+    border-color: var(--captain-purple);
+    box-shadow: 0 0 0 0.2rem rgba(106, 48, 126, 0.25);
+}
+
+/* Tables */
+.table thead th {
+    background-color: #f8f9fc;
+    border-bottom: 2px solid #e3e6f0;
+    font-weight: 600;
+    color: #5a5c69;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.table-responsive {
+    border-radius: 0.5rem;
+}
+
+/* Status badges */
+.badge {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.375rem;
+}
+
+/* User profile image */
+.img-profile {
+    border: 2px solid rgba(255,255,255,0.2);
+    transition: all 0.2s ease;
+}
+
+.img-profile:hover {
+    border-color: rgba(255,255,255,0.5);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.show {
+        transform: translateX(0);
+    }
+    
+    main {
+        margin-left: 0;
+    }
+    
+    .topbar {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* Loading states */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Animations */
+.animated--grow-in {
+    animation: grow-in 0.2s ease-out;
+}
+
+@keyframes grow-in {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Utility classes */
+.text-xs {
+    font-size: 0.75rem;
+}
+
+.shadow {
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
+}
+
+/* Custom scrollbar */
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}

@@ -1,0 +1,10 @@
+<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Star logo -->
+  <polygon points="30,10 35,22 48,22 38,30 42,42 30,36 18,42 22,30 12,22 25,22" fill="#ff6b6b"/>
+  
+  <!-- Captain text -->
+  <text x="55" y="25" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#6A307E">Captain</text>
+  
+  <!-- Dispatch text -->
+  <text x="55" y="45" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#3B256E">Dispatch</text>
+</svg>

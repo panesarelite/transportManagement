@@ -1,0 +1,118 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Global users collection (for compatibility)
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function getUserRole() {
+      return request.auth.token.role;
+    }
+    
+    function getCompanyRID() {
+      return request.auth.token.companyRID;
+    }
+    
+    function isAdmin() {
+      return getUserRole() == 'admin';
+    }
+    
+    function isDispatcher() {
+      return getUserRole() == 'dispatcher';
+    }
+    
+    function isDriver() {
+      return getUserRole() == 'driver';
+    }
+    
+    function isCustomer() {
+      return getUserRole() == 'customer';
+    }
+    
+    function isAccountant() {
+      return getUserRole() == 'accountant';
+    }
+    
+    function hasRole(role) {
+      return getUserRole() == role;
+    }
+    
+    function canManageDispatches() {
+      return isAdmin() || isDispatcher();
+    }
+    
+    function canViewDispatches() {
+      return isAdmin() || isDispatcher() || isCustomer() || isAccountant();
+    }
+    
+    function belongsToCompany(companyRID) {
+      return getCompanyRID() == companyRID;
+    }
+
+    // Companies collection
+    match /companies/{companyRID} {
+      allow read, write: if isAuthenticated() && belongsToCompany(companyRID) && (isAdmin() || isDispatcher());
+      
+      // Company users subcollection
+      match /users/{userId} {
+        allow read: if isAuthenticated() && belongsToCompany(companyRID);
+        allow write: if isAuthenticated() && belongsToCompany(companyRID) && (isAdmin() || request.auth.uid == userId);
+      }
+      
+      // Drivers subcollection
+      match /drivers/{driverId} {
+        allow read: if isAuthenticated() && belongsToCompany(companyRID) && canViewDispatches();
+        allow write: if isAuthenticated() && belongsToCompany(companyRID) && canManageDispatches();
+      }
+      
+      // Trucks subcollection
+      match /trucks/{truckId} {
+        allow read: if isAuthenticated() && belongsToCompany(companyRID) && canViewDispatches();
+        allow write: if isAuthenticated() && belongsToCompany(companyRID) && canManageDispatches();
+      }
+    }
+
+    // Customer management structure
+    match /customer-management/customers/{companyRID}/departments/dispatch/{year}/{month}/{day}/dispatches/{dispatchId} {
+      allow read: if isAuthenticated() && belongsToCompany(companyRID) && canViewDispatches();
+      allow create: if isAuthenticated() && belongsToCompany(companyRID) && canManageDispatches();
+      allow update: if isAuthenticated() && belongsToCompany(companyRID) && 
+        (canManageDispatches() || 
+         (isDriver() && resource.data.driverId == request.auth.uid));
+      allow delete: if isAuthenticated() && belongsToCompany(companyRID) && isAdmin();
+    }
+
+    // Path documents (for ensuring document structure)
+    match /customer-management/customers/{companyRID} {
+      allow read, write: if isAuthenticated() && belongsToCompany(companyRID);
+    }
+    
+    match /customer-management/customers/{companyRID}/departments/dispatch {
+      allow read, write: if isAuthenticated() && belongsToCompany(companyRID);
+    }
+    
+    match /customer-management/customers/{companyRID}/departments/dispatch/{year} {
+      allow read, write: if isAuthenticated() && belongsToCompany(companyRID);
+    }
+    
+    match /customer-management/customers/{companyRID}/departments/dispatch/{year}/{month} {
+      allow read, write: if isAuthenticated() && belongsToCompany(companyRID);
+    }
+    
+    match /customer-management/customers/{companyRID}/departments/dispatch/{year}/{month}/{day} {
+      allow read, write: if isAuthenticated() && belongsToCompany(companyRID);
+    }
+
+    // Deny all other access
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

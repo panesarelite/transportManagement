@@ -1,0 +1,32 @@
+{
+  "firebase": {
+    "apiKey": "your-firebase-api-key",
+    "authDomain": "your-project.firebaseapp.com",
+    "projectId": "your-project-id",
+    "storageBucket": "your-project.appspot.com",
+    "messagingSenderId": "123456789",
+    "appId": "1:123456789:web:abcdef123456"
+  },
+  "googleMaps": {
+    "apiKey": "your-google-maps-api-key"
+  },
+  "company": {
+    "defaultTimezone": "America/Edmonton",
+    "defaultCountry": "Canada",
+    "supportedProvinces": [
+      "AB", "BC", "MB", "NB", "NL", "NS", "ON", "PE", "QC", "SK", "NT", "NU", "YT"
+    ]
+  },
+  "features": {
+    "liveTracking": true,
+    "dangerousGoods": true,
+    "reeferTransport": true,
+    "multiDayDispatches": true,
+    "csvExport": true
+  },
+  "security": {
+    "sessionTimeout": 3600,
+    "maxLoginAttempts": 5,
+    "passwordMinLength": 8
+  }
+}
